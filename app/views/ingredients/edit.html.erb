@@ -1,0 +1,10 @@
+<h1> Edit <%= @ingredient.name.capitalize %> </h1>
+
+<%= form_for @ingredient do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.submit %>
+<% end %>
+<%= link_to 'Delete', @ingredient, method: :delete %></div>
+<%= link_to 'Back', ingredients_path %>

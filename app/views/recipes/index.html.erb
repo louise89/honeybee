@@ -3,3 +3,6 @@
 <% @recipes.each do |recipe| %>
   <div><%= link_to(recipe.name, recipe_path(recipe.id)) %></div>
 <% end %>
+<br>
+<br>
+<%= link_to 'Back', root_path %>

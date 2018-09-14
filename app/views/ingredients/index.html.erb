@@ -1,0 +1,15 @@
+<h1>All Ingredients! </h1>
+
+<% if @ingredients.any? %>
+  <% @ingredients.each do |ingredient| %>
+    <div><%= link_to(ingredient.name, ingredient_path(ingredient.id)) %> -
+    <%= link_to 'Edit', edit_ingredient_path(ingredient.id) %> -
+    <%= link_to 'Delete', ingredient, method: :delete %></div>
+  <% end %>
+<% else %>
+  No Ingredients found!
+<% end %>
+<br>
+<br>
+<%= link_to 'New', new_ingredient_path %>
+<%= link_to 'Back', root_path %>
