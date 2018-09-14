@@ -1,0 +1,5 @@
+<h1> <%= @recipe.name %> </h1>
+
+<%= @markdown.render(@recipe.description).html_safe %>
+
+<%= link_to 'Back', recipes_path %>
