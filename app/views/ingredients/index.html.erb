@@ -2,9 +2,12 @@
 
 <% if @ingredients.any? %>
   <% @ingredients.each do |ingredient| %>
-    <div><%= link_to(ingredient.name, ingredient_path(ingredient.id)) %> -
-    <%= link_to 'Edit', edit_ingredient_path(ingredient.id) %> -
-    <%= link_to 'Delete', ingredient, method: :delete %></div>
+    <div>
+      <%= ingredient.id %> -
+      <%= link_to(ingredient.name, ingredient_path(ingredient.id)) %> -
+      <%= link_to 'Edit', edit_ingredient_path(ingredient.id) %> -
+      <%= link_to 'Delete', ingredient, method: :delete %>
+    </div>
   <% end %>
 <% else %>
   No Ingredients found!
