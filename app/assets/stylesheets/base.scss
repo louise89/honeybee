@@ -1,0 +1,175 @@
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: normal;
+}
+
+a {
+  text-decoration: none;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: asset_url('bg');
+  background-color: $primary;
+
+  font-family: "Open Sans"
+}
+
+@mixin text-border($thickness, $color) {
+  text-shadow:
+    -$thickness -$thickness 0 $color,
+    $thickness  $thickness 0 $color;
+}
+
+header {
+  width: $site-width;
+  margin: 1em auto;
+  padding: 1em 0;
+  display: flex;
+
+  .menu {
+    width: 100%;
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+    align-items: center;
+    justify-content: center;
+
+    a {
+      color: $black;
+
+      border-bottom: 1px solid transparent;
+      position: relative;
+      display: flex;
+      justify-content: center;
+
+      &::before, &::after {
+        content: '';
+        width: 0%;
+        height: 0px;
+        border-top: 1px solid $black;
+        display: block;
+        position: absolute;
+        bottom: -2px;
+
+        transition: width 240ms;
+      }
+
+      &::after {
+        bottom: inherit;
+        top: 2px;
+
+        transition-delay: 60ms;
+      }
+    }
+
+    a:hover {
+      &::before, &::after {
+        width: 100%;
+      }
+    }
+
+    li {
+      padding-right: 1em;
+      font-family: "roboto slab";
+    }
+
+    .search {
+      width: 300px;
+      background-color: #fff;
+      border-radius: 20px;
+      padding: .5em 1em;
+      font-size: 0.7em;
+      position: relative;
+      right: 0;
+
+      opacity: 0.7;
+
+      .honey-stick {
+        position: absolute;
+        width: 20px;
+        right: 0.6em;
+        top: 0.5em;
+      }
+    }
+  }
+
+  .logo {
+    @include text-border(4px, fade-out($white, 0.8));
+    font-size: 2.5em;
+    line-height: 1.5em;
+
+    font-family: pacifico;
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    color: $black;
+    position: relative;
+    display: inline-block;
+
+    @keyframes flight-of-the-bumblebee {
+        0% {
+          top: -0.1em;
+        }
+
+        25% {
+          transform: rotate(5deg);
+        }
+
+        50% {
+          top: 0em;
+        }
+
+        75% {
+          transform: rotate(-5deg);
+        }
+
+        100% {
+          top: -0.1em;
+        }
+    }
+
+    .bee-icon {
+      width: 32px;
+      position: absolute;
+      right: 0em;
+
+      animation: flight-of-the-bumblebee;
+      animation-duration: 1200ms;
+      animation-direction: normal;
+      animation-timing-function: ease-out;
+      animation-iteration-count: infinite;
+    }
+  }
+}
+
+// header .logo::after {
+//   position: absolute;
+//   bottom: 12px;
+//   left:0;
+//   content: '';
+//   display: inline-block;
+//   height: 1px;
+//   width: 100%;
+//   border-top: 2px dashed $black;
+// }
+
+main {
+  width: $site-width;
+  margin: 0 auto 10em;
+  border-radius: 4px;
+  background-color: $white;
+  min-height: 50em;
+  box-shadow: 0 3px 3px -2px fade-out($black, 0.5);
+}

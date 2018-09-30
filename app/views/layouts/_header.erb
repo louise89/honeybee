@@ -1,0 +1,22 @@
+<header>
+  <ul class="menu">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Recipes', recipes_path %></li>
+    <li><%= link_to 'Ingredients', ingredients_path %></li>
+  </ul>
+
+  <%= link_to root_path do %>
+    <h1 class="logo">
+      Honeybee
+      <%= image_tag "bee.svg", class: 'bee-icon' %>
+    </h1>
+  <% end %>
+
+  <div class="menu">
+    <div class="search">
+      Have a buzz around...
+
+      <%= image_tag "honey-stick.svg", class: 'honey-stick' %>
+    </div>
+  </div>
+</header>

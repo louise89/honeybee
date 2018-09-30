@@ -1,5 +1,29 @@
-<h1> <%= @recipe.name %> </h1>
 
-<%= @markdown.render(@recipe.description).html_safe %>
+<div class="recipes-page">
+  <div class="header">
+    <div class="feature-image">
+      <% if @recipe.id == 3 %>
+        <%= image_tag 'choc-bic' %>
+      <% else %>
+        <%= image_tag 'fried-chicken' %>
+      <% end %>
+    </div>
 
-<%= link_to 'Back', recipes_path %>
+    <h1><%= @recipe.name %></h1>
+
+    <div class="admin-actions">
+      <%= link_to 'Edit', edit_recipe_path(@recipe) %>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="ingredients">
+      Ingredients...
+    </div>
+
+    <div class="steps">
+      <%= @markdown.render(@recipe.description).html_safe %>
+    </div>
+  </div>
+
+</div>

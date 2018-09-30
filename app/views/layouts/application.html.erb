@@ -7,9 +7,19 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300|Pacifico|Open+Sans" rel="stylesheet">
   </head>
 
   <body>
-    <%= yield %>
+    <div id="container">
+      <%= render 'layouts/header' %>
+
+      <main>
+        <%= yield %>
+      </main>
+
+      <footer></footer>
+    </div>
   </body>
 </html>

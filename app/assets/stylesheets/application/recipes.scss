@@ -1,0 +1,104 @@
+// Place all the styles related to the Recipes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.recipes-page {
+  font-family: "Roboto Slab";
+
+  .header {
+    width: 100%;
+    padding: 1em;
+    background-color: $cream;
+    color: fade-out($black, 0.2);
+    font-weight: 100;
+    border-bottom: 3px dashed darken($cream, 5%);
+    display: flex;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+
+    h1 {
+      margin-left: .5em;
+      position: relative;
+    }
+
+    .feature-image {
+      width: 256px;
+      height: 256px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 4px;
+      border: 5px solid lighten($cream, 4%);
+      box-shadow: 0 0 10px 5px darken($cream, 8%);
+
+      img {
+        height: 100%;
+      }
+    }
+
+    .admin-actions {
+      font-size: 1em;
+      position: absolute;
+      left: calc(100% - 1px);
+      border-radius: 0 5px 5px 0;
+      background-color: darken($cream, 5%);
+      padding: .5em;
+      border-left: 2px dashed darken($cream, 25%);
+    }
+  }
+
+  .main {
+    display: flex;
+    padding: 1em;
+
+    .ingredients {
+      $colour: $white;
+
+      width: 15em;
+      background-color: $white;
+      box-shadow: 0 10px 10px fade-out(darken($colour, 20%), 0.8);
+      border: 1px solid darken($colour, 20%);
+      border-radius: 4px;
+      padding: 1em;
+    }
+
+    .steps {
+      width: 30em;
+      margin-left: 1em;
+
+      ol {
+        list-style: none;
+        counter-reset: my-awesome-counter;
+        margin-top: 0;
+      }
+
+      ol li {
+        counter-increment: my-awesome-counter;
+        display: flex;
+
+        color: fade-out($black, 0.3);
+
+        position: relative;
+        padding: 0 0 1em 0;
+        margin: 0 0 1em 0;
+        font-size: .7em;
+
+        p {
+          padding: 0;
+          margin: 0;
+        }
+      }
+
+      ol li::before {
+        content: counter(my-awesome-counter) ". ";
+        font-size: 2em;
+        font-weight: bold;
+        position: absolute;
+        left: -1em;
+        top: -.1em;
+        color: $secondary;
+      }
+    }
+  }
+}
