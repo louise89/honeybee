@@ -16,11 +16,6 @@
     border-radius: 4px 4px 0 0;
     position: relative;
 
-    h1 {
-      margin-left: .5em;
-      position: relative;
-    }
-
     .feature-image {
       width: 256px;
       height: 256px;
@@ -35,6 +30,10 @@
       img {
         height: 100%;
       }
+    }
+
+    .info {
+      margin-left: 1em;
     }
 
     .admin-actions {
