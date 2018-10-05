@@ -18,7 +18,16 @@
 
   <div class="main">
     <div class="ingredients">
-      Ingredients...
+      <p>Ingredients...</p>
+      <% if @recipe.ingredients.any? %>
+        <% @recipe.recipe_ingredients.each do |recipeingredient| %>
+          <%= recipeingredient.quantity %>
+          <%= recipeingredient.ingredient.name %>
+          <br>
+        <% end %>
+      <% else %>
+      "No Ingredients Added yet!"
+      <% end %>
     </div>
 
     <div class="steps">
