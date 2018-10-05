@@ -13,13 +13,9 @@
     font-weight: 100;
     border-bottom: 3px dashed darken($cream, 5%);
     display: flex;
+    flex-direction: column;
     border-radius: 4px 4px 0 0;
     position: relative;
-
-    h1 {
-      margin-left: .5em;
-      position: relative;
-    }
 
     .feature-image {
       width: 256px;

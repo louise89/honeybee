@@ -10,7 +10,7 @@
     </div>
 
     <h1><%= @recipe.name %></h1>
-
+    <h4>By <%= @recipe.user.name %></h4>
     <div class="admin-actions">
       <%= link_to 'Edit', edit_recipe_path(@recipe) %>
     </div>
