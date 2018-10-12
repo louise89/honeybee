@@ -1,0 +1,7 @@
+development:
+  database_user: otb
+  database_password: OtbOtb
+
+test:
+  database_user: otb
+  database_password: OtbOtb

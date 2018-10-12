@@ -2,7 +2,7 @@
 set -e
 
 main() {
-  # copy_application_settings
+  copy_application_settings
   bundle_application
   # yarn_install
   create_temp
