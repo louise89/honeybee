@@ -4,11 +4,14 @@
   <%= f.label :name %>
   <%= f.text_field :name %>
 
+  <br>
   <%= f.label :description %>
-  <%= f.text_area :description %>
+  <%= f.text_area :description, rows: 15, cols: 40 %>
+  <br>
 
   <%= f.submit %>
 <% end %>
+
 
 <h2> Add Ingredients </h2>
 <!-- <ul>
@@ -20,6 +23,8 @@
 <%= collection_check_boxes(:recipe, :ingredient_ids, Ingredient.all, :id, :name) %>
 
 <%= link_to 'Delete', @recipe, method: :delete %></div>
+
+<hr>
 <%= link_to 'Back', recipes_path %>
 
 
