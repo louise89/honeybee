@@ -22,7 +22,7 @@ class IngredientsController < ApplicationController
     if @ingredient.save
       redirect_to @ingredient
     else
-      render :index
+      render :new
     end
   end
 
