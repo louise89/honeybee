@@ -1,0 +1,20 @@
+<%= @recipe.errors.full_messages.inspect %>
+
+<%= form_for @recipe do |f| %>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <br>
+  <%= f.label :description %>
+  <%= f.text_area :description, rows: 15, cols: 40 %>
+  <br>
+
+  <%= f.submit %>
+<% end %>
+
+<hr>
+<%= link_to 'Back', recipes_path %>
+<hr>

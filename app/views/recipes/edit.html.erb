@@ -1,32 +1,8 @@
 <h1> Edit <%= @recipe.name.capitalize %> </h1>
 
-<%= form_for @recipe do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-
-  <br>
-  <%= f.label :description %>
-  <%= f.text_area :description, rows: 15, cols: 40 %>
-  <br>
-
-  <%= f.submit %>
-<% end %>
-
-
-<h2> Add Ingredients </h2>
-<!-- <ul>
-  <% Ingredient.all.each do |ingredient| %>
-    <li><%= ingredient.name %></li>
-  <% end %>
-</ul> -->
-
-<%= collection_check_boxes(:recipe, :ingredient_ids, Ingredient.all, :id, :name) %>
+<%= render partial: 'form' %>
 
 <%= link_to 'Delete', @recipe, method: :delete %></div>
-
-<hr>
-<%= link_to 'Back', recipes_path %>
-
 
 <!-- #select ingredients from ingredient model
 #on the edit page of the recipe
