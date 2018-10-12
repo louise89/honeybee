@@ -47,9 +47,28 @@ class RecipesController < ApplicationController
     end
   end
 
+  def add_ingredient
+    @recipe = Recipe.find(params[:id])
+
+    @recipe.recipe_ingredients.create(recipe_ingredients_params)
+    render :edit
+  end
+
+  def remove_ingredient
+    @recipe = Recipe.find(params[:id])
+    @recipe_ingredient = RecipeIngredient.find(params[:recipe_ingredient_id])
+
+    @recipe_ingredient.destroy
+    render :edit
+  end
+
   private
 
   def recipe_params
     params.require(:recipe).permit(:name, :description, :user_id)
+  end
+
+  def recipe_ingredients_params
+    params.require(:recipe_ingredient).permit(:recipe_id, :ingredient_id, :quantity)
   end
 end
