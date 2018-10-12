@@ -12,7 +12,22 @@
   <%= f.submit %>
 <% end %>
 
-<hr>
 
-<%= link_to 'Delete', @recipe, method: :delete %>
+<h2> Add Ingredients </h2>
+<!-- <ul>
+  <% Ingredient.all.each do |ingredient| %>
+    <li><%= ingredient.name %></li>
+  <% end %>
+</ul> -->
+
+<%= collection_check_boxes(:recipe, :ingredient_ids, Ingredient.all, :id, :name) %>
+
+<%= link_to 'Delete', @recipe, method: :delete %></div>
+
+<hr>
 <%= link_to 'Back', recipes_path %>
+
+
+<!-- #select ingredients from ingredient model
+#on the edit page of the recipe
+#submit chosen ingredients and add them to recipe ingredient database. -->

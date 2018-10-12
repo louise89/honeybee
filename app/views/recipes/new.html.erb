@@ -8,6 +8,16 @@
   <%= f.text_area :description %>
 
   <%= f.submit %>
+  <% end %>
+
+<br>
+<%= collection_check_boxes(:recipe, :ingredient_ids, Ingredient.all, :id, :name) do |b| %>
+  <div>
+    <%= b.check_box %>
+    <%= b.label %>
+  </div>
 <% end %>
+<br>
+
 <%= link_to 'Delete', @recipe, method: :delete %></div>
 <%= link_to 'Back', recipes_path %>
