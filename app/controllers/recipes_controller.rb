@@ -50,7 +50,14 @@ class RecipesController < ApplicationController
   def add_ingredient
     @recipe = Recipe.find(params[:id])
 
-    @recipe.recipe_ingredients.create(recipe_ingredients_params)
+    current_ingredient = @recipe.recipe_ingredients.find_by_ingredient_id(ingredient_id)
+
+    if current_ingredient.present?
+      current_ingredient.increase_quantity(new_quantity)
+    else
+      @recipe.recipe_ingredients.create(recipe_ingredients_params)
+    end
+
     render :edit
   end
 
@@ -70,5 +77,13 @@ class RecipesController < ApplicationController
 
   def recipe_ingredients_params
     params.require(:recipe_ingredient).permit(:recipe_id, :ingredient_id, :quantity)
+  end
+
+  def ingredient_id
+    recipe_ingredients_params[:ingredient_id]
+  end
+
+  def new_quantity
+    recipe_ingredients_params[:quantity].to_f
   end
 end

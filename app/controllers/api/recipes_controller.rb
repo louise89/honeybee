@@ -1,4 +1,4 @@
-class Api::RecipesController < ApplicationController
+class Api::RecipesController < ApiController
    skip_before_action :verify_authenticity_token
 
   def add_ingredient
@@ -18,6 +18,10 @@ class Api::RecipesController < ApplicationController
     end
   end
 
+  def random
+    render json: Recipe.order("RAND()").limit(random_number)
+  end
+
   private
 
   def recipe
@@ -34,5 +38,9 @@ class Api::RecipesController < ApplicationController
 
   def ingredient_id
     params[:ingredient_id]
+  end
+
+  def random_number
+    params[:random_number]
   end
 end
