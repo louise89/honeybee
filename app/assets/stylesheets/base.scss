@@ -85,6 +85,18 @@ header {
       font-family: "roboto slab";
     }
 
+    .user-panel {
+      width: 100%;
+      display: flex;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      position: relative;
+
+      align-items: center;
+      justify-content: center;
+    }
+
     .search {
       width: 300px;
       background-color: #fff;
