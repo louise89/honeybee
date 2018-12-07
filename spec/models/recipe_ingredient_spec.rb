@@ -18,17 +18,4 @@ RSpec.describe RecipeIngredient, type: :model do
 
     it { is_expected.to eq 'Carrot' }
   end
-
-  describe '#quantity' do
-    subject { recipe_ingredient.increase_quantity(new_quantity) }
-
-    let(:new_quantity) { 2 }
-
-    it { is_expected.to be true }
-
-    it 'updates the quantity to include the new quantity' do
-      subject
-      expect(recipe_ingredient.quantity).to eq(3)
-    end
-  end
 end
