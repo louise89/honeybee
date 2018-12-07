@@ -4,13 +4,4 @@ class Recipe < ApplicationRecord
   belongs_to :user
 
   validates_presence_of :name, :description
-
-  def as_json(_options=nil)
-    {
-      id: id,
-      name: name,
-      description: description,
-      user: user 
-    }
-  end
 end
