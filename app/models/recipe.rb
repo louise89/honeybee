@@ -10,7 +10,7 @@ class Recipe < ApplicationRecord
       id: id,
       name: name,
       description: description,
-      user: user 
+      user: user,
     }
   end
 end
