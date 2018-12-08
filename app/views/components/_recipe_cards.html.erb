@@ -1,0 +1,10 @@
+<h3 class='recipe-cards__heading'><%= heading %></h3>
+<div class="recipe-cards__list">
+  <%=
+    render(
+      partial: 'components/recipe_cards/card',
+      collection: recipes,
+      as: :recipe,
+    )
+  %>
+</div>

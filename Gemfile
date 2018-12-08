@@ -43,6 +43,19 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'rails-controller-testing'
+  gem 'faker'
+
+  # Debugging
+  gem 'awesome_print'
+  gem 'byebug'
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'rainbow'
+  # gem 'pry-timetravel'
+  # gem 'pry-rescue'
+  # gem 'pry-stack_explorer'
+  # gem 'pry-doc'
 end
 
 group :development do

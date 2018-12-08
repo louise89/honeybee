@@ -1,13 +1,28 @@
 
 
 // https://coolors.co/e5c45d-20a39e-f25f5c-101113-fdf3ea
-$primary: #e5c45d;
+$primary: #ffa64f;
 $secondary: #20a39e;
 $highlight: #f25f5c;
 $black: #101113;
 $white: #fdf3ea;
-
+$headings-color: #cc9056;
 $cream: #feecd6;
 
 
 $site-width: 80%;
+
+@mixin text-border($thickness, $color) {
+  text-shadow:
+    -$thickness -$thickness 0 $color,
+    $thickness  $thickness 0 $color;
+}
+
+// This is needed because semantic UI resets the styling for
+// anchor tags which I can't seem to override.
+@mixin anchor-color($color) {
+  color: $color;
+
+  &:hover { color: $color; }
+  &:visited { color: $color; }
+}

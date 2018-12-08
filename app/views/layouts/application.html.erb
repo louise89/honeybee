@@ -5,24 +5,27 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300|Pacifico|Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300|Pacifico|Open+Sans|Cabin" rel="stylesheet">
   </head>
 
   <body>
     <div id="container">
-      <%= render 'layouts/header' %>
+      <%= render 'layouts/sidebar' %>
 
       <main>
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+        <%= yield(:before_app) %>
 
-        <%= yield %>
+        <div class="app">
+          <%= render 'layouts/flash' %>
+
+          <%= yield %>
+        </div>
       </main>
-
-      <footer></footer>
     </div>
   </body>
 </html>

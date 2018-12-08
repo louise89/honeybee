@@ -1,41 +1,21 @@
+<% content_for :before_app do %>
+  <%= render 'components/featured' %>
+<% end %>
 
-<div class="recipes-page">
-  <div class="header">
-    <div class="feature-image">
-      <% if @recipe.id == 3 %>
-        <%= image_tag 'choc-bic' %>
-      <% else %>
-        <%= image_tag 'fried-chicken' %>
-      <% end %>
+<div class="recipe ui unstackable items">
+  <div class="item">
+    <div class="recipe__image ui medium image">
+      <%= image_tag 'wireframe/white-image' %>
     </div>
-
-    <div class="info">
-      <h1><%= @recipe.name %></h1>
-      <h4>By <%= @recipe.user.name %></h4>
-    </div>
-
-    <div class="admin-actions">
-      <%= link_to 'Edit', edit_recipe_path(@recipe) %>
-    </div>
-  </div>
-
-  <div class="main">
-    <div class="ingredients">
-      <p>Ingredients...</p>
-      <% if @recipe.ingredients.any? %>
-        <% @recipe.recipe_ingredients.each do |recipeingredient| %>
-          <%= recipeingredient.quantity %>
-          <%= recipeingredient.ingredient.name %>
-          <br>
-        <% end %>
-      <% else %>
-      "No Ingredients Added yet!"
-      <% end %>
-    </div>
-
-    <div class="steps">
-      <%= @markdown.render(@recipe.description).html_safe %>
+    <div class="content">
+      <div class="ui huge header">Recipe Name</div>
+      <div class="meta">
+        <span>by User display name</span>
+      </div>
+      <div class="description">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus illo quas corporis, neque doloremque perspiciatis earum dolore dolorum, fuga distinctio hic nemo. Quas vel perspiciatis officia cumque accusamus assumenda minus.</p>
+        <p>Aperiam iure illum odio, minus culpa laboriosam ipsa atque obcaecati sapiente dignissimos quas consequatur blanditiis porro fuga architecto magni, expedita alias vel ad ipsum excepturi possimus similique repudiandae quam dicta!</p>
+      </div>
     </div>
   </div>
-
 </div>
