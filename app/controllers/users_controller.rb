@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def can_edit?
-    current_user && current_user === @user
+    current_user && current_user === @user || current_user.admin?
   end
 
   def user_params
