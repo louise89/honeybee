@@ -1,0 +1,12 @@
+
+<%= link_to recipe do %>
+  <div class="recipe-cards__card">
+    <div class="recipe-cards__card__thumbnail" style='background-color: <%= %w{#d7d5b7 #d7c5b7 #d7cdb7 #d7bdb7}.sample %>;'></div>
+
+    <div class="recipe-cards__card__name">
+      <%= recipe.name %>
+    </div>
+
+    <%= link_to recipe.user.email, recipe.user, class: 'recipe-cards__card__author' %>
+  </div>
+<% end %>

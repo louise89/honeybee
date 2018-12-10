@@ -1,0 +1,38 @@
+.recipe-cards {
+  &__heading {
+    font-size: 2em;
+    margin-bottom: 1em;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 2em;
+  }
+
+  &__card {
+    margin-right: 1em;
+    margin-bottom: 1em;
+
+    &__thumbnail {
+      background-color: lighten($headings-color, 50%);
+      width: 240px;
+      height: 240px;
+      border-radius: 0.5em;
+      margin-bottom: .5em;
+    }
+
+    &__name {
+      color: $headings-color;
+    }
+
+    &__author {
+      font-size: .8em;
+      color: desaturate(lighten($headings-color, 10%), 50%);
+      text-transform: uppercase;
+      overflow: hidden;
+      width: 15em;
+      text-overflow: ellipsis;
+    }
+  }
+}

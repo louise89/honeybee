@@ -1,0 +1,24 @@
+<div class="sidebar">
+  <%= link_to root_path, class: 'logo' do %>
+    Honeybee
+    <%= image_tag "bee.svg", class: 'bee-icon' %>
+  <% end %>
+
+  <div class="sidebar__user-area">
+    <% if current_user %>
+
+      <%= link_to current_user do %>
+        <div class="sidebar__user-area__avatar">
+          <%= image_tag 'bee-movie'%>
+        </div>
+      <% end %>
+      <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to 'Log in', new_user_session_path %>
+    <% end %>
+  </div>
+
+  <% if current_user %>
+    <button class='sidebar__new-recipe'>New Recipe</button>
+  <% end %>
+</div>

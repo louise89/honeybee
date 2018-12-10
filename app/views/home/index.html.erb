@@ -1,4 +1,13 @@
-<h1> Welcome to HoneyBee </h1>
+<% content_for :before_app do %>
+  <%= render 'components/featured' %>
+<% end %>
 
-<%= link_to 'Recipes', recipes_path %>
-<%= link_to 'Ingredients', ingredients_path %>
+<% @recipes.each do |date, recipes| %>
+  <%=
+    render(
+      'components/recipe_cards',
+      heading: date.strftime("%A, %B #{date.day.ordinalize}"), 
+      recipes: recipes,
+    )
+  %>
+<% end %>

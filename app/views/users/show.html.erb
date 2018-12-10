@@ -1,0 +1,7 @@
+<h1><%= @user.display_name %></h1>
+
+<div class="ui divider"></div>
+
+<% if @user === current_user || current_user.admin? %>
+  <%= button_to "Edit", edit_user_path(@user), class: 'ui button', method: :get %>
+<% end %>
