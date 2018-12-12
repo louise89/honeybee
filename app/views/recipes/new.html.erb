@@ -1,0 +1,19 @@
+<h2>Add a recipe</h2>
+
+<div class="ui big form">
+  <%= form_for @recipe do %>
+    <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :description %>
+      <%= f.text_area :name %>
+    </div>
+
+    <div class="field">
+      <%= f.submit 'Create Recipe', class: 'ui huge positive fluid button' %>
+    </div>
+  <% end %>
+</div>
