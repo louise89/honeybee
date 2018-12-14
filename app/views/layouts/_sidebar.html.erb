@@ -19,6 +19,6 @@
   </div>
 
   <% if current_user %>
-    <button class='sidebar__new-recipe'>New Recipe</button>
+    <%= button_to 'New Recipe', new_recipe_path, class: 'sidebar__new-recipe', method: :get %>
   <% end %>
 </div>

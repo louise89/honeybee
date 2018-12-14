@@ -1,7 +1,7 @@
 <h2>Add a recipe</h2>
 
 <div class="ui big form">
-  <%= form_for @recipe do %>
+  <%= form_for @recipe do |f| %>
     <div class="field">
       <%= f.label :name %>
       <%= f.text_field :name %>
@@ -9,7 +9,7 @@
 
     <div class="field">
       <%= f.label :description %>
-      <%= f.text_area :name %>
+      <%= f.text_area :description %>
     </div>
 
     <div class="field">
