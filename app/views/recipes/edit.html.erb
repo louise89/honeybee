@@ -16,21 +16,16 @@
           <div class="field">
             <%= form.label :name %>
             <%= form.text_field :name %>
-
           </div>
 
           <div class="field">
-            <label>Description</label>
-            <textarea>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, ratione cupiditate eligendi! Veritatis aliquam, culpa rerum ipsum beatae officiis adipisci voluptatum quisquam dolorem hic architecto reiciendis molestiae quia! Assumenda, perferendis.
-              Velit, repellat adipisci magni consequuntur, voluptate obcaecati fugit dicta illo illum fuga molestiae, sunt expedita! Autem ipsum, amet assumenda excepturi possimus nisi, fuga exercitationem natus, quas quae, nihil ipsam veritatis.
-              Iusto aspernatur sed dolor fugit! Adipisci et illo nobis. Incidunt, vero earum, repellendus eius ab doloribus reiciendis eveniet ratione numquam neque exercitationem optio, recusandae nihil sequi qui iure explicabo fuga!
-            </textarea>
+            <%= form.label :description %>
+            <%= form.text_area :description %>
           </div>
 
           <div class="ui grid">
             <div class="twelve wide column">
-              <button class="ui positive fluid button">Save Recipe</button>
+              <%= form.submit 'Save Recipe', class: "ui positive fluid button" %>
             </div>
             <div class="four wide column">
               <button class="ui basic red fluid button">Delete</button>
