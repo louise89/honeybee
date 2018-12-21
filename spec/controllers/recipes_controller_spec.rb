@@ -10,6 +10,15 @@ RSpec.describe RecipesController, type: :controller do
   let(:name) { 'existing recipe' }
   let(:description) { 'existing recipe description' }
 
+  describe '#show' do
+    it 'assigns a recipe with a passed in id' do
+      get :show, params: {
+        id: recipe.id
+      }
+      expect(assigns[:recipe]).to eql(recipe)
+    end
+  end
+
   describe '#new' do
     it 'assigns a new recipe' do
       get :new
