@@ -6,6 +6,10 @@ RSpec.describe RecipesController, type: :controller do
   let(:email) { 'test@test.com' }
   let(:password) { 'louiseisverycool' }
 
+  let(:recipe) { Recipe.create!(name: name, description: description, user: user) }
+  let(:name) { 'existing recipe' }
+  let(:description) { 'existing recipe description' }
+
   describe '#new' do
     it 'assigns a new recipe' do
       get :new
@@ -33,7 +37,7 @@ RSpec.describe RecipesController, type: :controller do
     it 'shows the flash message' do
       post_request
 
-      expect(flash[:notice]).to eql('congratulations')
+      expect(flash[:notice]).to eql('Congratulations')
     end
 
     it 'redirects to the edit page' do
@@ -60,7 +64,7 @@ RSpec.describe RecipesController, type: :controller do
       it 'shows the flash message' do
         post_request
 
-        expect(flash[:alert]).to eql('You dun fucked up')
+        expect(flash[:alert]).to eql('You have made a mistake')
       end
 
       it 'renders the new action' do
@@ -72,10 +76,6 @@ RSpec.describe RecipesController, type: :controller do
   end
 
   describe '#edit' do
-    let(:recipe) { Recipe.create!(name: name, description: description, user: user) }
-    let(:name) { 'existing recipe' }
-    let(:description) { 'existing recipe description' }
-
     it 'assigns an existing recipe' do
       get :edit, params: { id: recipe.id }
 
@@ -84,24 +84,52 @@ RSpec.describe RecipesController, type: :controller do
   end
 
   describe '#update' do
-    # let(:recipe) { Recipe.create!(name: name, description: description, user: user) }
-    # let(:name) { 'existing recipe' }
-    # let(:description) { 'existing recipe description' }
-    #
-    # let(:put_request) do
-    #   put :update, params: {
-    #     recipe: {
-    #       name: new_name,
-    #       description: new_description,
-    #       user_id: user.id
-    #     }
-    #   }
-    # end
-    # let(:new_name) { 'new name' }
-    # let(:new_description) { 'new desc' }
+    let(:new_attributes) { { name: new_name } }
+    let(:new_name) { '5 guys' }
+    let(:put_request) {
+      put :update,
+      params:
+      {
+        id: recipe.id,
+        recipe: new_attributes
+      }
+    }
 
-    it 'updates the requested recipe' do
+    it "updates the requested recipe" do
       put_request
+      recipe.reload
+      expect(recipe.name).to eq(new_name)
+    end
+
+    it 'shows the flash message' do
+      put_request
+
+      expect(flash[:notice]).to eql('Edit Saved')
+    end
+
+    it 'redirects to the recipe page' do
+      expect(put_request).to redirect_to(recipe_path)
+    end
+
+    context 'when the recipe doesn`t update' do
+      let(:new_name) {''}
+
+      it "does not update the requested recipe" do
+        put_request
+        recipe.reload
+
+        expect(recipe.name).to_not eq(new_name)
+      end
+
+      it 'shows the flash message' do
+        put_request
+
+        expect(flash[:alert]).to eql('Edit Not Saved')
+      end
+
+      it 'redirects to the edit page' do
+        expect(put_request).to redirect_to(edit_recipe_path(recipe))
+      end
     end
   end
 end

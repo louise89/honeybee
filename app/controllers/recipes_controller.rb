@@ -7,10 +7,10 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
 
     if @recipe.save
-      flash[:notice] = 'congratulations'
+      flash[:notice] = 'Congratulations'
       redirect_to edit_recipe_path(@recipe)
     else
-      flash[:alert] = 'You dun fucked up'
+      flash[:alert] = 'You have made a mistake'
       render :new
     end
   end
@@ -20,7 +20,15 @@ class RecipesController < ApplicationController
   end
 
   def update
-    
+    @recipe = Recipe.find(params[:id])
+
+    if @recipe.update(recipe_params)
+      flash[:notice] = 'Edit Saved'
+      redirect_to @recipe
+    else
+      flash[:alert] = 'Edit Not Saved'
+      redirect_to edit_recipe_path(@recipe)
+    end
   end
 
   private
