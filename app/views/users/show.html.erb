@@ -2,6 +2,16 @@
 
 <div class="ui divider"></div>
 
+<%=
+  render(
+    'components/recipe_cards',
+    heading: 'Recipes',
+    recipes: @user.recipes,
+  )
+%>
+
+<div class="ui divider"></div>
+
 <% if @user === current_user || current_user.admin? %>
   <%= button_to "Edit", edit_user_path(@user), class: 'ui button', method: :get %>
 <% end %>
