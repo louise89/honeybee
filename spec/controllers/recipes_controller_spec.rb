@@ -10,6 +10,10 @@ RSpec.describe RecipesController, type: :controller do
   let(:name) { 'existing recipe' }
   let(:description) { 'existing recipe description' }
 
+  before do
+    sign_in user if user
+  end
+
   describe '#show' do
     it 'assigns a recipe with a passed in id' do
       get :show, params: {
@@ -23,6 +27,22 @@ RSpec.describe RecipesController, type: :controller do
     it 'assigns a new recipe' do
       get :new
       expect(assigns[:recipe]).to be_a_new(Recipe)
+    end
+
+    context 'when a user is not logged in' do
+      let(:user) { nil }
+
+      it 'shows the flash message' do
+        get :new
+
+        expect(flash[:alert]).to eql('You need to sign in')
+      end
+
+      it 'redirects to the home page' do
+        get :new
+
+        expect(response).to redirect_to(root_path)
+      end
     end
   end
 
@@ -68,12 +88,6 @@ RSpec.describe RecipesController, type: :controller do
         expect {
           post_request
         }.to_not change { Recipe.count }
-      end
-
-      it 'shows the flash message' do
-        post_request
-
-        expect(flash[:alert]).to eql('You have made a mistake')
       end
 
       it 'renders the new action' do

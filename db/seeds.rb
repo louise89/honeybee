@@ -9,6 +9,16 @@
 Recipe.destroy_all
 User.destroy_all
 
+User.create!(
+  email: "honey@honeybee.com",
+  password: 'qwerty123',
+)
+
+User.create!(
+  email: "bee@honeybee.com",
+  password: 'qwerty123',
+)
+
 10.times do
   User.create!(
     email: Faker::Internet.email,

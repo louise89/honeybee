@@ -1,4 +1,6 @@
 class RecipesController < ApplicationController
+  before_action :require_login
+
   def show
     @recipe = Recipe.find(params[:id])
   end
@@ -14,7 +16,6 @@ class RecipesController < ApplicationController
       flash[:notice] = 'Congratulations'
       redirect_to edit_recipe_path(@recipe)
     else
-      flash[:alert] = 'You have made a mistake'
       render :new
     end
   end
@@ -36,6 +37,14 @@ class RecipesController < ApplicationController
   end
 
   private
+
+  def require_login
+    if !user_signed_in?
+      flash[:alert] = 'You need to sign in'
+
+      redirect_to root_path
+    end
+  end
 
   def recipe_params
     params.require(:recipe).permit(:name, :description, :user_id)
