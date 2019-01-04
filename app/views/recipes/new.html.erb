@@ -1,0 +1,32 @@
+<h2>Add a recipe</h2>
+
+<% if @recipe.errors.any? %>
+  <div class="ui red message">
+    Could not save, you have the following errors:
+    <ul>
+      <% @recipe.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="ui big form">
+  <%= form_for @recipe do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+
+    <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </div>
+
+    <div class="field">
+      <%= f.submit 'Create Recipe', class: 'ui huge positive fluid button' %>
+    </div>
+  <% end %>
+</div>

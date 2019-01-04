@@ -8,13 +8,17 @@
       <%= image_tag 'wireframe/white-image' %>
     </div>
     <div class="content">
-      <div class="ui huge header">Recipe Name</div>
+      <div class="ui huge header"><%= @recipe.name %></div>
       <div class="meta">
-        <span>by User display name</span>
+        <span>by <%= @recipe.user.display_name %></span>
       </div>
       <div class="description">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus illo quas corporis, neque doloremque perspiciatis earum dolore dolorum, fuga distinctio hic nemo. Quas vel perspiciatis officia cumque accusamus assumenda minus.</p>
-        <p>Aperiam iure illum odio, minus culpa laboriosam ipsa atque obcaecati sapiente dignissimos quas consequatur blanditiis porro fuga architecto magni, expedita alias vel ad ipsum excepturi possimus similique repudiandae quam dicta!</p>
+        <p><%= @recipe.description %></p>
+
+        <% if @recipe.user === current_user || current_user.admin? %>
+          <%= button_to "Edit", edit_recipe_path(@recipe), class: 'ui button', method: :get %>
+        <% end %>
+
       </div>
     </div>
   </div>
