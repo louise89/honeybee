@@ -58,9 +58,7 @@ RSpec.describe RecipesController, type: :controller do
     end
 
     it 'creates a new recipe' do
-      expect {
-        post_request
-      }.to change(Recipe, :count).by(1)
+      expect { post_request }.to change(Recipe, :count).by(1)
     end
 
     it 'shows the flash message' do
@@ -153,6 +151,33 @@ RSpec.describe RecipesController, type: :controller do
       it 'redirects to the edit page' do
         expect(put_request).to redirect_to(edit_recipe_path(recipe))
       end
+    end
+  end
+
+  describe '#destroy' do
+    let(:delete_request) do
+      delete :destroy, params: {
+        id: recipe.id
+      }
+    end
+
+    before do
+      recipe
+    end
+
+    it 'deletes a recipe' do
+      expect { delete_request }.to change(Recipe, :count).by(-1)
+    end
+
+    it 'displays a flash message' do
+      delete_request
+
+      expect(flash[:notice]).to eql('Recipe was successfully deleted.')
+    end
+
+    it "redirects to home page" do
+      delete_request
+      expect(response).to redirect_to(root_path)
     end
   end
 end

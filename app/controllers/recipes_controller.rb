@@ -36,6 +36,14 @@ class RecipesController < ApplicationController
     end
   end
 
+  def destroy
+    @recipe = Recipe.find(params[:id])
+    @recipe.destroy
+
+    flash[:notice] = 'Recipe was successfully deleted.'
+    redirect_to root_path
+  end
+
   private
 
   def require_login
