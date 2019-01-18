@@ -15,10 +15,9 @@
       <div class="description">
         <p><%= @recipe.description %></p>
 
-        <% if @recipe.user === current_user || current_user.admin? %>
+        <% if can_edit_recipe?(@recipe) %>
           <%= button_to "Edit", edit_recipe_path(@recipe), class: 'ui button', method: :get %>
         <% end %>
-
       </div>
     </div>
   </div>
