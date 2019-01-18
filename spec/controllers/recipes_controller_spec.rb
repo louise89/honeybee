@@ -2,16 +2,12 @@ require 'rails_helper'
 
 RSpec.describe RecipesController, type: :controller do
 
-  let(:user) { User.create!(name: 'test', email: email, password: password) }
-  let(:email) { 'test@test.com' }
-  let(:password) { 'louiseisverycool' }
-
-  let(:recipe) { Recipe.create!(name: name, description: description, user: user) }
-  let(:name) { 'existing recipe' }
-  let(:description) { 'existing recipe description' }
+  let(:recipe) { Recipe.create!(name: 'recipe', description: 'recipe description', user: user) }
+  let(:user) { User.create!(name: 'test', email: 'test@test.com', password: 'louiseisverycool') }
+  let(:current_user) { user }
 
   before do
-    sign_in user if user
+    sign_in current_user if current_user
   end
 
   describe '#show' do
@@ -97,10 +93,27 @@ RSpec.describe RecipesController, type: :controller do
   end
 
   describe '#edit' do
+    let(:edit_request) { get :edit, params: { id: recipe.id } }
     it 'assigns an existing recipe' do
-      get :edit, params: { id: recipe.id }
+      edit_request
 
       expect(assigns[:recipe]).to eql(recipe)
+    end
+
+    context 'when the current user does not own the recipe' do
+      let(:current_user) { User.create!(name: 'test', email: 'test2@test.com', password: 'louiseisverycool') }
+
+      it 'redirects to the recipe show page' do
+        edit_request
+
+        expect(response).to redirect_to(recipe_path(recipe))
+      end
+
+      it 'shows a flash message' do
+        edit_request
+
+        expect(flash[:alert]).to eql('You cannot edit another person\'s recipe!')
+      end
     end
   end
 
@@ -152,6 +165,22 @@ RSpec.describe RecipesController, type: :controller do
         expect(put_request).to redirect_to(edit_recipe_path(recipe))
       end
     end
+
+    context 'when the current user does not own the recipe' do
+      let(:current_user) { User.create!(name: 'test', email: 'test2@test.com', password: 'louiseisverycool') }
+
+      it 'redirects to the recipe show page' do
+        put_request
+
+        expect(response).to redirect_to(recipe_path(recipe))
+      end
+
+      it 'shows a flash message' do
+        put_request
+
+        expect(flash[:alert]).to eql('You cannot edit another person\'s recipe!')
+      end
+    end
   end
 
   describe '#destroy' do
@@ -178,6 +207,22 @@ RSpec.describe RecipesController, type: :controller do
     it "redirects to home page" do
       delete_request
       expect(response).to redirect_to(root_path)
+    end
+
+    context 'when the current user does not own the recipe' do
+      let(:current_user) { User.create!(name: 'test', email: 'test2@test.com', password: 'louiseisverycool') }
+
+      it 'redirects to the recipe show page' do
+        delete_request
+
+        expect(response).to redirect_to(recipe_path(recipe))
+      end
+
+      it 'shows a flash message' do
+        delete_request
+
+        expect(flash[:alert]).to eql('You cannot edit another person\'s recipe!')
+      end
     end
   end
 end

@@ -1,8 +1,9 @@
 class RecipesController < ApplicationController
   before_action :require_login, except: [:show]
+  before_action :require_owner, only: [:edit, :update, :destroy]
+  before_action :recipe, except: [:create, :new]
 
   def show
-    @recipe = Recipe.find(params[:id])
   end
 
   def new
@@ -21,24 +22,20 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    @recipe = Recipe.find(params[:id])
   end
 
   def update
-    @recipe = Recipe.find(params[:id])
-
-    if @recipe.update(recipe_params)
+    if recipe.update(recipe_params)
       flash[:notice] = 'Edit Saved'
-      redirect_to @recipe
+      redirect_to recipe
     else
       flash[:alert] = 'Edit Not Saved'
-      redirect_to edit_recipe_path(@recipe)
+      redirect_to edit_recipe_path(recipe)
     end
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
-    @recipe.destroy
+    recipe.destroy
 
     flash[:notice] = 'Recipe was successfully deleted.'
     redirect_to root_path
@@ -52,6 +49,18 @@ class RecipesController < ApplicationController
 
       redirect_to root_path
     end
+  end
+
+  def require_owner
+    if !helpers.can_edit_recipe?(recipe)
+      flash[:alert] = 'You cannot edit another person\'s recipe!'
+
+      redirect_to recipe_path(recipe)
+    end
+  end
+
+  def recipe
+    @recipe ||= Recipe.find(params[:id])
   end
 
   def recipe_params
