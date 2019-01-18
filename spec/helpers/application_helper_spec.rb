@@ -1,11 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationHelper do
-  let(:recipe) { Recipe.create!(name: 'Chicken', description: 'Chicken Steps', user: recipe_user) }
+  let(:recipe) { create(:recipe) }
 
-  let(:recipe_user) { User.create!(email: 'test@test.com', name: 'Recipe User', password: '1234567') }
-
-  let(:current_user) { User.create!(email: 'test2@test.com', name: 'Other User', password: '1234567', admin: admin?) }
+  let(:current_user) { create(:user, admin: admin?) }
   let(:admin?) { false }
 
   before do
@@ -16,7 +14,7 @@ RSpec.describe ApplicationHelper do
     subject { helper.can_edit_recipe?(recipe) }
 
     context 'when a user is the recipe owner' do
-      let(:current_user) { recipe_user }
+      let(:current_user) { recipe.user }
       it { is_expected.to be true }
     end
 
