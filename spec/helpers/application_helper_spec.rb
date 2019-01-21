@@ -9,7 +9,7 @@ RSpec.describe ApplicationHelper do
   let(:admin?) { false }
 
   before do
-    sign_in current_user if current_user
+    allow(helper).to receive(:current_user).and_return(current_user)
   end
 
   describe 'can_edit_recipe?' do
