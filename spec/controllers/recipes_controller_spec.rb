@@ -94,10 +94,6 @@ RSpec.describe RecipesController, type: :controller do
   describe '#edit' do
     let(:edit_request) { get :edit, params: { id: recipe.id } }
 
-    before do
-      recipe
-    end
-
     it 'assigns an existing recipe' do
       edit_request
 
