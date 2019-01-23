@@ -1,13 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe RecipeIngredient, type: :model do
-  let(:recipe_ingredient) { RecipeIngredient.new(quantity: quantity, ingredient: ingredient, recipe: recipe) }
-  let(:ingredient) { Ingredient.new(name: ingredient_name) }
-  let(:recipe) { Recipe.new(name: recipe_name, description: description) }
-  let(:ingredient_name) { 'Carrot' }
-  let(:quantity) { 1 }
-  let(:recipe_name) { 'Chicken Pasta' }
-  let(:description) { 'recipe description' }
+  let(:recipe_ingredient) { create(:recipe_ingredient) }
+  let(:ingredient) { create(:ingredient) }
+  let(:recipe) { create(:recipe) }
 
   describe '#name' do
     subject { recipe_ingredient.name }

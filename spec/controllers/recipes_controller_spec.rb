@@ -2,9 +2,8 @@ require 'rails_helper'
 
 RSpec.describe RecipesController, type: :controller do
 
-  let(:recipe) { Recipe.create!(name: 'recipe', description: 'recipe description', user: user) }
-  let(:user) { User.create!(name: 'test', email: 'test@test.com', password: 'louiseisverycool') }
-  let(:current_user) { user }
+  let(:recipe) { create(:recipe) }
+  let(:current_user) { recipe.user }
 
   before do
     sign_in current_user if current_user
@@ -26,7 +25,7 @@ RSpec.describe RecipesController, type: :controller do
     end
 
     context 'when a user is not logged in' do
-      let(:user) { nil }
+      let(:current_user) { nil }
 
       it 'shows the flash message' do
         get :new
@@ -48,7 +47,7 @@ RSpec.describe RecipesController, type: :controller do
         recipe: {
           name: 'Choco bits',
           description: 'Super Chocolatey',
-          user_id: user.id
+          user_id: current_user.id
         }
       }
     end
@@ -73,7 +72,7 @@ RSpec.describe RecipesController, type: :controller do
           recipe: {
             name: '',
             description: '',
-            user_id: user.id
+            user_id: current_user.id
           }
         }
       end
@@ -94,6 +93,7 @@ RSpec.describe RecipesController, type: :controller do
 
   describe '#edit' do
     let(:edit_request) { get :edit, params: { id: recipe.id } }
+
     it 'assigns an existing recipe' do
       edit_request
 
@@ -101,7 +101,7 @@ RSpec.describe RecipesController, type: :controller do
     end
 
     context 'when the current user does not own the recipe' do
-      let(:current_user) { User.create!(name: 'test', email: 'test2@test.com', password: 'louiseisverycool') }
+      let(:current_user) { create(:user) }
 
       it 'redirects to the recipe show page' do
         edit_request
@@ -129,7 +129,7 @@ RSpec.describe RecipesController, type: :controller do
       }
     }
 
-    it "updates the requested recipe" do
+    it 'updates the requested recipe' do
       put_request
       recipe.reload
       expect(recipe.name).to eq(new_name)
@@ -148,7 +148,7 @@ RSpec.describe RecipesController, type: :controller do
     context 'when the recipe doesn`t update' do
       let(:new_name) {''}
 
-      it "does not update the requested recipe" do
+      it 'does not update the requested recipe' do
         put_request
         recipe.reload
 
@@ -204,7 +204,7 @@ RSpec.describe RecipesController, type: :controller do
       expect(flash[:notice]).to eql('Recipe was successfully deleted.')
     end
 
-    it "redirects to home page" do
+    it 'redirects to home page' do
       delete_request
       expect(response).to redirect_to(root_path)
     end
