@@ -1,24 +1,26 @@
 class RecipeIngredientsController < ApplicationController
-  def new
-    @recipe_ingredient = RecipeIngredient.new(recipe_id_params)
+  before_action :recipe
+
+  def index
+    @recipe_ingredient = recipe.recipe_ingredients.build
   end
 
   def create
-    @recipe_ingredient = RecipeIngredient.new(recipe_ingredient_params.merge(recipe_id_params))
+    @recipe_ingredient = recipe.recipe_ingredients.build(recipe_ingredient_params)
 
     if @recipe_ingredient.save
       flash[:notice] = 'Ingredient saved'
-    end
 
-    render :new
+      redirect_to recipe_ingredients_path
+    else
+      render :index
+    end
   end
 
   private
 
-  def recipe_id_params
-    {
-      recipe_id: params[:recipe_id]
-    }
+  def recipe
+    @recipe ||= Recipe.find(params[:recipe_id])
   end
 
   def recipe_ingredient_params
