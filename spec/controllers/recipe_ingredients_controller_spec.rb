@@ -1,13 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe RecipeIngredientsController, type: :controller do
-  let(:recipe) { Recipe.create!(name: name, description: description, user: user) }
-  let(:name) { 'existing recipe' }
-  let(:description) { 'existing desc' }
-
-  let(:user) { User.create!(name: 'test', email: email, password: password) }
-  let(:email) { 'test@test.com' }
-  let(:password) { 'louiseisverycool' }
+  let(:recipe) { create(:recipe) }
 
   describe '#index' do
     let(:index_request) do
