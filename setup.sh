@@ -22,7 +22,7 @@ main() {
 
 copy_application_settings() {
   echo -n "Copying application settings... "
-  cp -i config/application.yml.example config/application.yml
+  cp -i .env.example .env
   echo "Done"
 }
 
