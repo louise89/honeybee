@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe RecipeIngredientsController, type: :controller do
-  let(:recipe) { create(:recipe) }
+  let(:recipe) { create(:recipe, user: current_user) }
+  let(:current_user) { create(:user) }
+
+  before do
+    sign_in current_user if current_user
+  end
 
   describe '#index' do
     let(:index_request) do
@@ -81,13 +86,28 @@ RSpec.describe RecipeIngredientsController, type: :controller do
         expect(response).to render_template(:index)
       end
     end
+
+    context 'when the current_user does not own the recipe' do
+      let(:recipe) { create(:recipe) }
+
+      it 'sets a flash alert' do
+        create_request
+
+        expect(flash[:alert]).to eql('You cannot edit another person\'s recipe!')
+      end
+
+      it 'redirects to the recipe path' do
+        create_request
+
+        expect(response).to redirect_to(recipe_path(recipe))
+      end
+    end
   end
 
   describe '#destroy' do
     subject(:destroy_request) do
       delete :destroy, params: { recipe_id: recipe.id, id: recipe_ingredient.id }
     end
-    let(:recipe) { create(:recipe) }
     let(:recipe_ingredient) { create(:recipe_ingredient) }
 
     it 'destroys the recipe ingredient for the passed in ID' do
@@ -100,6 +120,22 @@ RSpec.describe RecipeIngredientsController, type: :controller do
       destroy_request
 
       expect(response).to redirect_to(recipe_ingredients_path(recipe.id))
+    end
+
+    context 'when the current_user does not own the recipe' do
+      let(:recipe) { create(:recipe) }
+
+      it 'sets a flash alert' do
+        destroy_request
+
+        expect(flash[:alert]).to eql('You cannot edit another person\'s recipe!')
+      end
+
+      it 'redirects to the recipe path' do
+        destroy_request
+
+        expect(response).to redirect_to(recipe_path(recipe))
+      end
     end
   end
 end

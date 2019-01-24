@@ -1,5 +1,6 @@
 class RecipeIngredientsController < ApplicationController
   before_action :recipe
+  before_action :ensure_can_manage_recipe, only: [:create, :destroy]
 
   def index
     @recipe_ingredient = recipe.recipe_ingredients.build
@@ -36,5 +37,13 @@ class RecipeIngredientsController < ApplicationController
         :name
       ]
     )
+  end
+
+  def ensure_can_manage_recipe
+    if !helpers.can_edit_recipe?(recipe)
+      flash[:alert] = 'You cannot edit another person\'s recipe!'
+
+      redirect_to recipe_path(recipe)
+    end
   end
 end

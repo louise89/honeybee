@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :user
-  before_action :ensure_can_edit, only: [ :edit, :update ]
+  before_action :ensure_can_manage, only: [ :edit, :update ]
 
   def show
   end
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     @user ||= User.find(params[:id])
   end
 
-  def ensure_can_edit
+  def ensure_can_manage
     if !can_edit?
       redirect_to user_path(@user)
     end

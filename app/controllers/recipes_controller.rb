@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   before_action :require_login, except: [:show]
-  before_action :require_owner, only: [:edit, :update, :destroy]
+  before_action :ensure_can_manage, only: [:edit, :update, :destroy]
   before_action :recipe, except: [:create, :new]
 
   def show
@@ -51,7 +51,7 @@ class RecipesController < ApplicationController
     end
   end
 
-  def require_owner
+  def ensure_can_manage
     if !helpers.can_edit_recipe?(recipe)
       flash[:alert] = 'You cannot edit another person\'s recipe!'
 
