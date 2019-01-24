@@ -82,4 +82,24 @@ RSpec.describe RecipeIngredientsController, type: :controller do
       end
     end
   end
+
+  describe '#destroy' do
+    subject(:destroy_request) do
+      delete :destroy, params: { recipe_id: recipe.id, id: recipe_ingredient.id }
+    end
+    let(:recipe) { create(:recipe) }
+    let(:recipe_ingredient) { create(:recipe_ingredient) }
+
+    it 'destroys the recipe ingredient for the passed in ID' do
+      recipe_ingredient
+
+      expect{ destroy_request }.to change(RecipeIngredient, :count).by(-1)
+    end
+
+    it 'redirect to the new recipe ingredients page' do
+      destroy_request
+
+      expect(response).to redirect_to(recipe_ingredients_path(recipe.id))
+    end
+  end
 end

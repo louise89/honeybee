@@ -17,6 +17,12 @@ class RecipeIngredientsController < ApplicationController
     end
   end
 
+  def destroy
+    RecipeIngredient.destroy(params[:id])
+
+    redirect_to recipe_ingredients_path
+  end
+
   private
 
   def recipe
