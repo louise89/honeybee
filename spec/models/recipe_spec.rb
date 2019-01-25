@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Recipe, type: :model do
-  let(:user) { User.create!(email: 'test@test.com', password: 'qwerty123') }
+  let(:user) { create(:user) }
   let(:recipe_params) { { name: 'recipe', description: 'recipe', user: user } }
 
   describe '#grouped_by_day' do
@@ -39,6 +39,21 @@ RSpec.describe Recipe, type: :model do
       let(:other_user) { nil }
 
       it { is_expected.to be false }
+    end
+  end
+
+  describe '#random' do
+    subject { Recipe.random(number) }
+
+    let(:recipes) { create_list(:recipe, 10) }
+    let(:number) { 5 }
+
+    before do
+      recipes
+    end
+
+    it 'returns 5 random recipes' do
+      expect(subject.length).to eql(5)
     end
   end
 end
