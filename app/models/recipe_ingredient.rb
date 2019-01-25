@@ -6,6 +6,8 @@ class RecipeIngredient < ApplicationRecord
 
   accepts_nested_attributes_for :ingredient
 
+  scope :persisted, -> { where "id IS NOT NULL" }
+
   def name
     ingredient.name
   end
