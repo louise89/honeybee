@@ -1,0 +1,17 @@
+<h2><%= recipe.name %></h2>
+
+<div class="ui grid">
+  <div class="four wide column">
+    <div class="ui fluid vertical menu">
+      <%= link_to 'Overview', edit_recipe_path(recipe), class: 'fluid item' %>
+      <%= link_to recipe_ingredients_path(recipe), class: 'fluid item' do %>
+        Ingredients
+
+        <span class="ui label blue"><%= recipe.recipe_ingredients.persisted.length %></span>
+      <% end %>
+    </div>
+  </div>
+  <div class="twelve wide stretched column">
+    <%= yield %>
+  </div>
+</div>

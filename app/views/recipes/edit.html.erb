@@ -1,38 +1,28 @@
-<h2><%= @recipe.name %></h2>
+<%= render 'container', recipe: @recipe do %>
+  <div class="ui segment">
+    <%= form_for @recipe do |form| %>
 
-<%= form_for @recipe do |form| %>
-  <div class="ui grid">
-    <div class="four wide column">
-      <div class="ui fluid vertical menu">
-        <a class="active fluid item">
-          Recipe
-        </a>
-      </div>
-    </div>
-    <div class="twelve wide stretched column">
-      <div class="ui segment">
+      <div class="ui big form">
+        <div class="field">
+          <%= form.label :name %>
+          <%= form.text_field :name %>
+        </div>
 
-        <div class="ui big form">
-          <div class="field">
-            <%= form.label :name %>
-            <%= form.text_field :name %>
+        <div class="field">
+          <%= form.label :description %>
+          <%= form.text_area :description %>
+        </div>
+
+        <div class="ui grid">
+          <div class="twelve wide column">
+            <%= form.submit 'Save Recipe', class: "ui positive fluid button" %>
           </div>
-
-          <div class="field">
-            <%= form.label :description %>
-            <%= form.text_area :description %>
-          </div>
-
-          <div class="ui grid">
-            <div class="twelve wide column">
-              <%= form.submit 'Save Recipe', class: "ui positive fluid button" %>
-            </div>
-            <div class="four wide column">
-              <button class="ui basic red fluid button">Delete</button>
-            </div>
+          <div class="four wide column">
+            <button class="ui basic red fluid button">Delete</button>
           </div>
         </div>
-      </div>
+
+      <% end %>
     </div>
   </div>
 <% end %>

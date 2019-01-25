@@ -1,0 +1,68 @@
+<%= render 'recipes/container', recipe: @recipe do %>
+  <div class="twelve wide stretched column">
+    <div class="ui form">
+      <h4 class="ui dividing header">Add Ingredient</h4>
+
+      <% if @recipe_ingredient.errors.any? %>
+        <div class="ui red message">
+          <h3 class="header">Could not create recipe ingredient because of the following errors: </h3>
+
+          <ul>
+            <% @recipe_ingredient.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+
+      <%= form_for @recipe_ingredient do |form| %>
+        <div class="fields">
+          <div class="four wide field">
+            <%= form.text_field :quantity, placeholder: 'Quantity' %>
+          </div>
+
+          <div class="nine wide field">
+            <%= form.fields_for :ingredient, form.object.build_ingredient do |ingredient_form| %>
+              <%= ingredient_form.text_field :name, placeholder: 'Name' %>
+            <% end %>
+          </div>
+
+          <div class="three wide field">
+            <%= form.button class: 'ui fluid positive button' do %>
+              <i class="plus icon"></i> Add
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="ui divider"></div>
+
+    <div class="ui form">
+      <div class="fields">
+        <div class="four wide field">
+          <h3 class="ui header">Quantity</h3>
+        </div>
+
+        <div class="eleven wide field">
+          <h3 class="ui header">Name</h3>
+        </div>
+      </div>
+
+      <% @recipe.recipe_ingredients.persisted.each do |ingredient| %>
+        <div class="fields">
+          <div class="four wide field"><%= ingredient.quantity %></div>
+          <div class="eleven wide field"><%= ingredient.name %></div>
+          <div class="one wide field">
+            <%= link_to recipe_ingredient_path(id: ingredient.id), method: :delete do %>
+              <div class="ui fluid icon button negative"><i class="close icon"></i></div>
+            <% end %>
+          </div>
+        </div>
+        <div class="ui divider"></div>
+      <% end %>
+
+    </div>
+  </div>
+<% end %>
