@@ -7,4 +7,5 @@ Rails.application.routes.draw do
     resources :recipe_ingredients, as: :ingredients
   end
   resources :users
+  resources :randomiser
 end
