@@ -9,6 +9,10 @@ class Recipe < ApplicationRecord
     all.group_by { |post| post.created_at.to_date }.first(count)
   end
 
+  scope :random, -> (number) do
+    order(Arel.sql('RAND()')).limit(number)
+  end
+
   def owned_by?(other_user)
     user === other_user
   end

@@ -1,0 +1,9 @@
+<h1>Recipe Randomiser</h1>
+
+<%= form_tag('/randomiser') do %>
+  <p>
+     How many recipes would you like to randomise?
+  </p>
+  <%= select_tag(:number, options_for_select((1..10).to_a)) %>
+  <%= submit_tag "Go!" %>
+  <% end %>
