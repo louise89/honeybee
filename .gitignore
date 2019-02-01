@@ -31,3 +31,13 @@
 /config/master.key
 .env
 /vendor
+
+# Ignore meta-data file created by macOS
+.DS_Store
+
+# Ignore webpack files and folders
+public/assets
+public/packaged-assets
+node_modules
+npm-debug.log*
+__coverage__

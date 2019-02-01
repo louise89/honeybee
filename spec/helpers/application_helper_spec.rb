@@ -31,4 +31,59 @@ RSpec.describe ApplicationHelper do
       it { is_expected.to be true }
     end
   end
+
+  describe '#javascript_components' do
+    subject { helper.javascript_components('search', 'order_summary') }
+
+    before do
+      allow(helper).to receive(:webpack_javascript_path).with('search').
+        and_return('/public/assets/search')
+      allow(helper).to receive(:webpack_javascript_path).with('order_summary').
+        and_return('/public/assets/order_summary')
+    end
+
+    it 'creates script tags for the provided components' do
+      subject
+
+      expect(helper.content_for(:javascript_components)).to eq(
+        "<script src=\"/public/assets/search.js\" defer=\"defer\"></script>\n<script src=\"/public/assets/order_summary.js\" defer=\"defer\"></script>"
+      )
+    end
+  end
+
+  describe '#react_component' do
+    subject { helper.react_component(name, data, include_javascript_component) }
+
+    let(:name) { 'order_summary' }
+    let(:data) { {} }
+    let(:include_javascript_component) { true }
+
+    before do
+      allow(helper).to receive(:javascript_components).with(name)
+    end
+
+    it { is_expected.to eql('<div class="react-container__order-summary"></div>') }
+
+    it 'includes the javascript component' do
+      subject
+
+      expect(helper).to have_received(:javascript_components).once.with(name)
+    end
+
+    context 'when passing data' do
+      let(:data) { { query: 'order MYB123B' } }
+
+      it { is_expected.to eql('<div class="react-container__order-summary" data-query="order MYB123B"></div>') }
+    end
+
+    context 'when include_javascript_component is false' do
+      let(:include_javascript_component) { false }
+
+      it 'does not include the javascript component' do
+        subject
+
+        expect(helper).to_not have_received(:javascript_components)
+      end
+    end
+  end
 end
