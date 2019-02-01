@@ -10,8 +10,8 @@ RSpec.describe ApplicationHelper do
     allow(helper).to receive(:current_user).and_return(current_user)
   end
 
-  describe 'can_edit_recipe?' do
-    subject { helper.can_edit_recipe?(recipe) }
+  describe 'can_edit?' do
+    subject { helper.can_edit?(recipe) }
 
     context 'when a user is the recipe owner' do
       let(:current_user) { recipe.user }

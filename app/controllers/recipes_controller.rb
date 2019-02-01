@@ -52,7 +52,7 @@ class RecipesController < ApplicationController
   end
 
   def ensure_can_manage
-    if !helpers.can_edit_recipe?(recipe)
+    if !helpers.can_edit?(recipe)
       flash[:alert] = 'You cannot edit another person\'s recipe!'
 
       redirect_to recipe_path(recipe)

@@ -15,7 +15,7 @@
       <div class="description">
         <p><%= @recipe.description %></p>
 
-        <% if can_edit_recipe?(@recipe) %>
+        <% if can_edit?(@recipe) %>
           <%= button_to "Edit", edit_recipe_path(@recipe), class: 'ui button', method: :get %>
         <% end %>
       </div>

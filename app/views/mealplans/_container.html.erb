@@ -1,0 +1,12 @@
+<h2><%= mealplan.name %></h2>
+
+<div class="ui grid">
+  <div class="four wide column">
+    <div class="ui fluid vertical menu">
+      <%= link_to 'Overview', edit_mealplan_path(mealplan), class: 'fluid item' %>
+    </div>
+  </div>
+  <div class="twelve wide stretched column">
+    <%= yield %>
+  </div>
+</div>

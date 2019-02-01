@@ -1,0 +1,12 @@
+<div class="ui middle aligned animated selection list">
+  <% @mealplans.each do |mealplan| %>
+    <%= link_to mealplan_path(mealplan), class: 'item' do %>
+      <%= image_tag 'racoon', class: 'ui avatar image' %>
+      <div class="content">
+        <div class="header">
+            <%= mealplan.name %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

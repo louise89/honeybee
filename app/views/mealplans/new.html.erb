@@ -1,0 +1,15 @@
+<h1> Create a Mealplan! </h1>
+<div class="ui big form">
+  <%= form_for @mealplan do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+
+    <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.submit 'Create Mealplan', class: 'ui huge positive fluid button' %>
+    </div>
+  <% end %>
+</div>

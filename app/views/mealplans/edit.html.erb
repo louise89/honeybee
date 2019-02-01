@@ -1,28 +1,11 @@
-<%= render 'container', recipe: @recipe do %>
-
-<% if @recipe.errors.any? %>
-  <div class="ui red message">
-    Could not save, you have the following errors:
-    <ul>
-      <% @recipe.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
+<%= render 'container', mealplan: @mealplan do %>
   <div class="ui segment">
-    <%= form_for @recipe do |form| %>
+    <%= form_for @mealplan do |form| %>
 
       <div class="ui big form">
         <div class="field">
           <%= form.label :name %>
           <%= form.text_field :name %>
-        </div>
-
-        <div class="field">
-          <%= form.label :description %>
-          <%= form.text_area :description %>
         </div>
 
         <div class="ui grid">
