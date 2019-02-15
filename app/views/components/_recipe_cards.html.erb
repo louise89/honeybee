@@ -1,10 +1,14 @@
 <h3 class='recipe-cards__heading'><%= heading %></h3>
 <div class="recipe-cards__list">
-  <%=
-    render(
-      partial: 'components/recipe_cards/card',
-      collection: recipes,
-      as: :recipe,
-    )
-  %>
+  <% if recipes.any? %>
+    <%=
+      render(
+        partial: 'components/recipe_cards/card',
+        collection: recipes,
+        as: :recipe,
+      )
+    %>
+  <% else %>
+    No Recipes
+  <% end %>
 </div>

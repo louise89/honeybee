@@ -67,7 +67,7 @@ RSpec.describe MealplansController, type: :controller do
     it 'shows the flash message' do
       post_request
 
-      expect(flash[:notice]).to eql('Congratulations - recipes are saved to your mealplan')
+      expect(flash[:notice]).to eql('Congratulations - mealplan created')
     end
 
     it 'redirects to the edit page' do

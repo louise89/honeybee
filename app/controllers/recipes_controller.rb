@@ -1,7 +1,11 @@
 class RecipesController < ApplicationController
-  before_action :require_login, except: [:show]
+  before_action :require_login, except: [:show, :index]
   before_action :ensure_can_manage, only: [:edit, :update, :destroy]
-  before_action :recipe, except: [:create, :new]
+  before_action :recipe, except: [:create, :new, :index]
+
+  def index
+    @recipes = Recipe.grouped_by_day
+  end
 
   def show
   end

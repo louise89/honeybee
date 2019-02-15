@@ -6,5 +6,19 @@
   <br />
     <% if can_edit?(@mealplan) %>
       <%= button_to "Edit", edit_mealplan_path(@mealplan), class: 'ui button', method: :get %>
+      <br />
+
+      <%= form_for MealplanRecipe.new, url: mealplan_recipes_path(@mealplan.id) do |form| %>
+        <%= form.text_field :recipe_id %>
+
+        <%= form.submit 'Add Recipe' %>
+      <% end %>
     <% end %>
+
+
+    <%#= button_to "Add recipes", recipes_path, class: 'ui button', method: :get %>
+
+    <div class='ui divider'></div>
+
+    <%= render 'components/recipe_cards', heading: 'Mealplan Recipes', recipes: @mealplan.recipes %>
 </div>

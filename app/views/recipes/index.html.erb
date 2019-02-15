@@ -1,0 +1,9 @@
+<% @recipes.each do |date, recipes| %>
+  <%=
+    render(
+      'components/recipe_cards',
+      heading: date.strftime("%A, %B #{date.day.ordinalize}"),
+      recipes: recipes,
+    )
+  %>
+<% end %>

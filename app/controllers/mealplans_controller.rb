@@ -18,7 +18,7 @@ class MealplansController < ApplicationController
     @mealplan = Mealplan.new(create_params)
 
     if @mealplan.save
-      flash[:notice] = 'Congratulations - recipes are saved to your mealplan'
+      flash[:notice] = 'Congratulations - mealplan created'
       redirect_to edit_mealplan_path(@mealplan)
     else
       render :new
@@ -73,5 +73,9 @@ class MealplansController < ApplicationController
 
   def update_params
     params.require(:mealplan).permit(:status, :name)
+  end
+
+  def creator
+    MealplanCreator.new(@mealplan)
   end
 end

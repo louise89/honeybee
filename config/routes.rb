@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   end
   resources :users
   resources :randomiser
-  resources :mealplans
+  resources :mealplans do
+    resources :mealplan_recipes, as: :recipes
+  end
 end

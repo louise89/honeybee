@@ -18,6 +18,8 @@
         <% if can_edit?(@recipe) %>
           <%= button_to "Edit", edit_recipe_path(@recipe), class: 'ui button', method: :get %>
         <% end %>
+
+        <%= button_to "Add to Mealplan", mealplan_recipes_add_recipe_to_mealplan_path, class: 'ui button', method: :post %>
       </div>
     </div>
   </div>
